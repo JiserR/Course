@@ -29,10 +29,9 @@ Content-Type: text/plain; charset="UTF-8";
 
 letter = letter.encode("UTF-8")
 user = "vakulin-2000@mail.ru"
-password = "mvNTUPcqU2iztvEPym8f"
+password = ""  #пароль удалил для безопасности
 import smtplib
 server = smtplib.SMTP_SSL('smtp.mail.ru:465')
-server.login("vakulin-2000@mail.ru", "mvNTUPcqU2iztvEPym8f")
-server.sendmail("vakulin-2000@mail.ru", "test_dvmn@mail.ru", letter)
+server.login(user, password)
+server.sendmail(user, "test_dvmn@mail.ru", letter)
 server.quit()
-server.login()
