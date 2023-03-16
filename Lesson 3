@@ -29,7 +29,7 @@ mail = ("""Привет, {friend_name}! {my_name} приглашает тебя 
 сразу на имейл.""").format(my_name=my_name, website=website, friend_name=friend_name)
 
 letter = """\
-From: user
+From: vakulin-2000@mail.ru
 To: test_dvmn@mail.ru
 Subject: Приглашение!
 Content-Type: text/plain; charset="UTF-8";
