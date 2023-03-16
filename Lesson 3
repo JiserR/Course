@@ -1,3 +1,12 @@
+import smtplib
+import os
+from dotenv import load_dotenv
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+user = os.environ.get("user")
+password = os.environ.get("password")
+
 website = "https://dvmn.org/referrals/0pPWvbfaydo2X7BuUssbToEwwrRHfEDH2YKRBS3t/"
 friend_name = "Sasha"
 my_name = "Alex"
@@ -20,7 +29,7 @@ mail = ("""Привет, {friend_name}! {my_name} приглашает тебя 
 сразу на имейл.""").format(my_name=my_name, website=website, friend_name=friend_name)
 
 letter = """\
-From: vakulin-2000@mail.ru
+From: user
 To: test_dvmn@mail.ru
 Subject: Приглашение!
 Content-Type: text/plain; charset="UTF-8";
@@ -28,9 +37,6 @@ Content-Type: text/plain; charset="UTF-8";
 {mail}""".format(mail=mail)
 
 letter = letter.encode("UTF-8")
-user = "vakulin-2000@mail.ru"
-password = ""  #пароль удалил для безопасности
-import smtplib
 server = smtplib.SMTP_SSL('smtp.mail.ru:465')
 server.login(user, password)
 server.sendmail(user, "test_dvmn@mail.ru", letter)
