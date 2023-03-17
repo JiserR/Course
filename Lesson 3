@@ -4,13 +4,14 @@ from dotenv import load_dotenv
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
-user = os.getenv("user")
+sender_email = os.getenv("sender_email")
 password = os.getenv("password")
+recipient_email= os.getenv("recipient_email")
 
 website = "https://dvmn.org/referrals/0pPWvbfaydo2X7BuUssbToEwwrRHfEDH2YKRBS3t/"
-friend_name = "Sasha"
-my_name = "Alex"
-mail = ("""Привет, {friend_name}! {my_name} приглашает тебя на сайт {website}!
+recipient_name = "Sasha"
+sender_name = "Alex"
+text_mail = ("""Привет, {recipient_name}! {sender_name} приглашает тебя на сайт {website}!
 
 {website} — это новая версия онлайн-курса по программированию.
 Изучаем Python и не только. Решаем задачи. Получаем ревью от преподавателя.
@@ -26,18 +27,18 @@ mail = ("""Привет, {friend_name}! {my_name} приглашает тебя 
 
 Регистрируйся → {website}
 На курсы, которые еще не вышли, можно подписаться и получить уведомление о релизе \
-сразу на имейл.""").format(my_name=my_name, website=website, friend_name=friend_name)
+сразу на имейл.""").format(sender_name=sender_name, website=website, recipient_name=recipient_name)
 
 letter = """\
-From: vakulin-2000@mail.ru
-To: test_dvmn@mail.ru
+From: {sender_email}
+To: {recipient_email}
 Subject: Приглашение!
 Content-Type: text/plain; charset="UTF-8";
 
-{mail}""".format(mail=mail)
+{mail}""".format(mail=text_mail, sender_email=sender_email, recipient_email=recipient_email)
 
 letter = letter.encode("UTF-8")
 server = smtplib.SMTP_SSL('smtp.mail.ru:465')
-server.login(user, password)
-server.sendmail(user, "test_dvmn@mail.ru", letter)
+server.login(sender_email, password)
+server.sendmail(sender_email, recipient_email, letter)
 server.quit()
